@@ -2,23 +2,23 @@
 
     <div class="pure-menu pure-menu-horizontal">
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected">
+            <li class="pure-menu-item">
                 <a href="#" class="pure-menu-link pure-menu-heading">Markk</a>
             </li>
-            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover settings">
-                <a href="#" id="menuLink1" class="pure-menu-link">Settings</a>
-                <ul class="pure-menu-children">
-                    <li class="pure-menu-item"><a href="#" class="{ pure-button-primary: this.state == 'html'} pure-menu-link" onclick="{ toggleRendered }">HTML</a></li>
-                    <li class="pure-menu-item"><a href="#" class="{ pure-button-primary: this.zenmode} pure-menu-link" onclick="{ toggleZenmode }">Zen mode</a></li>
-                    <li class="pure-menu-item"><a href="#" class="{ pure-button-primary: this.fullscreen} pure-menu-link" onclick="{ toggleFullscreen }">Only Article</a></li>
-                </ul>
-            </li>
-            <li class="pure-menu-item pure-menu-selected">
+            <li class="pure-menu-item">
                 <div class="pure-control-group">
                     <label for="title">Title</label>
                     <input id="title" class="title-doc" type="title" value="{ this.doc.title }" placeholder="title">
                 </div>
             </li>
+            <li class="pure-menu-item">
+                <a href="#" class="pure-menu-link" onclick="{ toggleOptions }">Options</a>
+            </li>
+            <div class="{ options-hidden: this.hideOptions}">
+                <li class="pure-menu-item"><a href="#" class="{ pure-button-primary: this.state == 'html'} pure-menu-link" onclick="{ toggleRendered }">HTML</a></li>
+                <li class="pure-menu-item"><a href="#" class="{ pure-button-primary: this.zenmode} pure-menu-link" onclick="{ toggleZenmode }">Zen mode</a></li>
+                <li class="pure-menu-item"><a href="#" class="{ pure-button-primary: this.fullscreen} pure-menu-link" onclick="{ toggleFullscreen }">Preview</a></li>
+            </div>
         </ul>
     </div>
 
@@ -42,6 +42,7 @@
     <!-- this script tag is optional -->
     <script>
         this.fullscreen = false;
+        this.hideOptions = true;
         this.zenmode = false;
         this.state="rendered";
         this.doc = {
@@ -70,6 +71,10 @@
             } else {
                 this.state = 'rendered';
             }
+        }
+
+        toggleOptions() {
+            this.hideOptions = !this.hideOptions;
         }
     </script>
 
@@ -125,14 +130,8 @@
         width: 100%;
     }
 
-    .settings {
-        position: absolute;
-        right: 0px;
-        z-index: 99999;
-    }
-
-    .settings > a.pure-menu-link {
-        color: gray;
+    .options-hidden {
+        display: none;
     }
 
     </style>
